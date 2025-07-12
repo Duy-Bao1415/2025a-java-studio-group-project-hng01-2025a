@@ -1,15 +1,18 @@
 # 2025a-java-studio-group-project-hng01-2025a
+# Closing The Gap Data Analysis Project
+
 This project provides a web-based interface for analyzing indigenous data including education, health, and population statistics with interactive filtering and gap analysis tools.
 
 This implementation provides:
 
-Interactive data visualization for age, health, and education statistics
-Gap analysis tools for comparing datasets across years
-Advanced filtering system with multiple criteria
-Responsive design for all device sizes
-Dynamic data tables with sorting capabilities
-Project Structure:
+* Interactive data visualization for age, health, and education statistics
+* Gap analysis tools for comparing datasets across years
+* Advanced filtering system with multiple criteria
+* Responsive design for all device sizes
+* Dynamic data tables with sorting capabilities
 
+Project Structure:
+```bash
 ├── /src/main
 │    ├── java
 │    │    ├── app
@@ -88,50 +91,56 @@ Project Structure:
 │
 ├── pom.xml                                      - Maven configuration (Do not configure)
 └── README.md                                    - Project documentation and instructions
+
+```
+
 Current Libraries:
+* org.xerial.sqlite-jdbc (SQLite JDBC library)
+* javalin (lightweight Java Webserver)
+* thymeleaf (HTML template)
 
-org.xerial.sqlite-jdbc (SQLite JDBC library)
-javalin (lightweight Java Webserver)
-thymeleaf (HTML template)
 Required Dependencies:
+* slf4j-simple (logging)
+* sqlite-jdbc (database)
 
-slf4j-simple (logging)
-sqlite-jdbc (database)
-Running the Application
-Clone the repository
-Open in VSCode
-Install dependencies:
-Allow VSCode to configure build
-Download required Java libraries
-Run the application:
-Open src/main/java/app/App.java
-Click "Run" above main function
-Access at: http://localhost:7001
-Key Features
-Interactive Data Tables
+## Running the Application
 
-Sortable columns
-Custom scrolling
-Fixed headers
-Dynamic loading
-Advanced Filtering
+1. Clone the repository
+2. Open in VSCode
+3. Install dependencies:
+   - Allow VSCode to configure build
+   - Download required Java libraries
+4. Run the application:
+   - Open `src/main/java/app/App.java`
+   - Click "Run" above main function
+5. Access at: http://localhost:7001
 
-Age range selection
-Geographic filtering
-Status filtering
-Category filtering
-Gap Analysis
+## Key Features
 
-Year-over-year comparison
-Population trends
-Education gaps
-Health disparities
-Authors
+* Interactive Data Tables
+  - Sortable columns
+  - Custom scrolling
+  - Fixed headers
+  - Dynamic loading
+
+* Advanced Filtering
+  - Age range selection
+  - Geographic filtering
+  - Status filtering
+  - Category filtering
+
+* Gap Analysis
+  - Year-over-year comparison
+  - Population trends
+  - Education gaps
+  - Health disparities
+
+## Authors
 Team HN-G01-JavaStudio-2025A:
+* Uong Minh Duc
+* Tran Chi Thien
+* Luong Thuy Vy
+* Pham Duy Bao
+* Nguyen Hoang Tung
 
-Uong Minh Duc
-Tran Chi Thien
-Luong Thuy Vy
-Pham Duy Bao
-Nguyen Hoang Tung
 Copyright RMIT University (c) 2025
