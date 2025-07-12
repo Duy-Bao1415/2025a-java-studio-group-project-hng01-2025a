@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our vision</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/vision.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+      <div class="auth-buttons">
+          <a th:href="@{/signin}"><button>Sign In</button></a>
+          <a th:href="@{/signup}"><button>Register</button></a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="image-wrapper">
+     <div class="image-bg">
+     </div>
+     <img th:src="@{/images/ourvision.png}" alt="Illustration of four people representing Aboriginal and Torres Strait Islander community with text 'CLOSING THE GAP' above them in bold uppercase letters" height="256" width="256"/>
+    </div>
+    <div class="text-content">
+     <h2 class="heading">
+      OUR VISION
+     </h2>
+     <p class="paragraph">
+      Our mission is to support the Closing the Gap initiative by focusing on Outcome 1: Aboriginal and Torres Strait Islander people enjoy long and healthy lives and Outcome 5: Aboriginal and Torres Strait Islander students achieve their full learning potential. We raise awareness of critical issues like reduced life expectancy, infant mortality, and low school attendance. We provide culturally relevant resources—such as health tips in Indigenous languages and maps of ACCHS services—and offer support for early learning and family engagement. By tracking progress through clear data on health and education, we strive to help close the gap and create lasting impact.
+     </p>
+    </div>
+   </div>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

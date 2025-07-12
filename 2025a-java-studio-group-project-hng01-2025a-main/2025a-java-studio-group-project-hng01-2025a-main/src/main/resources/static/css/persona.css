@@ -1,0 +1,146 @@
+.personas-wrapper {
+width: 100%;
+margin: 40px 0 60px 0;
+background: transparent;
+}
+
+.personas-inner {
+max-width: 1000px;
+margin: 0 auto;
+padding: 24px 32px;
+display: flex;
+flex-direction: column;
+gap: 32px; /* space between cards */
+}
+
+.personas-wrapper p.intro {
+font-style: italic;
+font-weight: 400;
+color: #d9b38c;
+font-size: 1.5rem;
+margin-bottom: 8px;
+}
+
+.personas-wrapper .person {
+background: #fff;
+border-radius: 14px;
+box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+padding: 32px 28px 24px 28px;
+margin-bottom: 0; /* gap is now handled by flex */
+border: 1px solid #f0e6dd;
+transition: box-shadow 0.2s;
+font-size: 1.13rem; /* ~18px */
+}
+
+.personas-wrapper .person:hover {
+box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+}
+
+.personas-wrapper .person-header {
+display: flex;
+align-items: center;
+gap: 24px;
+margin-bottom: 6px;
+padding-left: 0;
+}
+
+.personas-wrapper .person-header img {
+width: 120px;
+height: 120px;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.personas-wrapper h2.name {
+font-style: italic;
+font-weight: 700;
+color: #9b0000;
+font-size: 2.1rem; /* ~33.6px */
+letter-spacing: 0.1em;
+margin: 0 0 6px 0;
+display: flex;
+align-items: center;
+}
+
+.personas-wrapper p.quote {
+font-style: italic;
+font-weight: 400;
+color: #b7b7b7;
+font-size: 1.05rem; /* ~16.8px */
+margin-top: 0;
+margin-bottom: 20px;
+max-width: 600px;
+}
+
+.personas-wrapper p.quote.karen {
+font-size: 0.98rem;
+max-width: 600px;
+}
+
+.personas-wrapper p.subheading {
+font-style: italic;
+font-weight: 600;
+color: #d9b38c;
+font-size: 1.1rem; /* ~17.6px */
+margin: 12px 0 6px 0;
+}
+
+.personas-wrapper ul {
+margin: 0 0 18px 20px;
+padding: 0;
+font-size: 1.05rem; /* ~16.8px */
+max-width: 600px;
+}
+
+.personas-wrapper ul li {
+margin-bottom: 4px;
+}
+
+.personas-wrapper p.text {
+font-size: 1.05rem; 
+margin: 0 0 18px 0;
+max-width: 600px;
+}
+
+@media (max-width: 800px) {
+.personas-inner {
+padding: 16px 4px;
+gap: 20px;
+}
+.personas-wrapper .person {
+padding: 18px 8px 14px 8px;
+font-size: 1rem;
+}
+.personas-wrapper h2.name {
+font-size: 1.4rem;
+}
+.personas-wrapper p.subheading,
+.personas-wrapper ul,
+.personas-wrapper p.text,
+.personas-wrapper p.quote {
+font-size: 0.98rem;
+}
+.personas-wrapper p.intro {
+font-size: 1.05rem;
+}
+}
+
+@media (max-width: 480px) {
+.personas-wrapper {
+padding: 16px 20px;
+}
+.personas-wrapper h2.name {
+font-size: 24px;
+}
+.personas-wrapper p.quote {
+font-size: 11px;
+}
+.personas-wrapper p.quote.karen {
+font-size: 10px;
+}
+.personas-wrapper ul,
+.personas-wrapper p.text {
+font-size: 13px;
+max-width: 100%;
+}
+}

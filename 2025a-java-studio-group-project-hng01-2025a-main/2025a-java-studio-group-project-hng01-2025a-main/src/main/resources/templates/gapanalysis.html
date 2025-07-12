@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${title}">Gap Analysis</title>
+  <link rel="stylesheet" th:href="@{/css/gapanalysis.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+      <div class="auth-buttons">
+          <a th:href="@{/signin}" class="auth-button">Sign In</a>
+          <a th:href="@{/signup}" class="auth-button">Register</a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li style="font-weight: bold;"><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="left-panel">
+      <form th:action="@{/gapanalysis}" method="post" id="mainForm">
+        <label class="dataset-label" for="datasets">DATASETS</label>
+        <select id="datasets" name="dataset" aria-label="Choose datasets" required>
+          <option value="">Choose datasets</option>
+          <option value="education" th:selected="${selectedDataset == 'education'}">Education Level</option>
+          <option value="health" th:selected="${selectedDataset == 'health'}">Health Conditions</option>
+          <option value="school" th:selected="${selectedDataset == 'school'}">School Completion</option>
+          <option value="population" th:selected="${selectedDataset == 'population'}">Population</option>
+        </select>
+        <label class="dataset-label" for="lgaSelect">SELECT LGA</label>
+        <select id="lgaSelect" name="targetLgacode" aria-label="Select LGA" required>
+          <option value="">Choose LGA</option>
+          <option th:each="lga : ${lgaCodes}"
+                  th:value="${lga.key}"
+                  th:text="${lga.value}"
+                  th:selected="${selectedLgaCode != null && selectedLgaCode == lga.key}">
+          </option>
+        </select>
+        <!-- Age Range Filters (initially hidden) -->
+        <div id="ageRangeFilters" style="display: none;">
+          <label class="dataset-label">Age Range</label>
+          <div class="range-container">
+            <span>0</span>
+            <input type="range" id="ageRange" name="targetage_min" min="0" max="65" value="0" 
+                   oninput="updateAgeRange(this.value, 'ageRangeValue')" />
+            <span>65+</span>
+            <span id="ageRangeValue" class="range-value">0</span>
+          </div>
+          <label class="dataset-label">Maximum Age</label>
+          <div class="range-container">
+            <span>0</span>
+            <input type="range" id="ageRangeMax" name="targetage_max" min="0" max="65" value="65" 
+                   oninput="updateAgeRange(this.value, 'ageRangeMaxValue')" />
+            <span>65+</span>
+            <span id="ageRangeMaxValue" class="range-value">65+</span>
+          </div>
+        </div>
+        <button type="submit" class="sort-btn">SORT</button>
+        <button type="reset" class="clear-btn">CLEAR ALL SELECTION</button>
+      </form>
+    </div>
+    <div class="right-panel">
+      <div class="search-filter-title">SEARCH FILTER</div>
+      <form th:action="@{/gapanalysis}" method="post" id="filterForm">
+        <input type="hidden" name="dataset" th:value="${selectedDataset}" />
+        <input type="hidden" name="targetLgacode" th:value="${selectedLgaCode}" />
+        <input type="hidden" name="targetage_min" th:value="${selectedAgeMin}" />
+        <input type="hidden" name="targetage_max" th:value="${selectedAgeMax}" />
+        <!-- Common Filters -->
+        <div class="filter-section">
+          <div class="filter-label">By Sex</div>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="sex" value="m" th:checked="${selectedSexes != null && selectedSexes.contains('m')}" />Male</label>
+            <label><input type="checkbox" name="sex" value="f" th:checked="${selectedSexes != null && selectedSexes.contains('f')}" />Female</label>
+          </div>
+        </div>
+        <!-- Health Conditions Filter -->
+        <div class="filter-section" th:if="${selectedDataset == 'health'}" data-dataset="health">
+          <div class="filter-label">Health Conditions</div>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="condition" value="arthritis" th:checked="${selectedConditions != null && selectedConditions.contains('arthritis')}" />Arthritis</label>
+            <label><input type="checkbox" name="condition" value="asthma" th:checked="${selectedConditions != null && selectedConditions.contains('asthma')}" />Asthma</label>
+            <label><input type="checkbox" name="condition" value="cancer" th:checked="${selectedConditions != null && selectedConditions.contains('cancer')}" />Cancer (any type) including remission</label>
+            <label><input type="checkbox" name="condition" value="dementia" th:checked="${selectedConditions != null && selectedConditions.contains('dementia')}" />Dementia (any stage) including Alzheimers</label>
+            <label><input type="checkbox" name="condition" value="diabetes" th:checked="${selectedConditions != null && selectedConditions.contains('diabetes')}" />Diabetes (excluding Gestational)</label>
+            <label><input type="checkbox" name="condition" value="heartdisease" th:checked="${selectedConditions != null && selectedConditions.contains('heartdisease')}" />Heart Disease (including Heart Attack or Angina)</label>
+            <label><input type="checkbox" name="condition" value="kidneydisease" th:checked="${selectedConditions != null && selectedConditions.contains('kidneydisease')}" />Kidney Disease</label>
+            <label><input type="checkbox" name="condition" value="lungcondition" th:checked="${selectedConditions != null && selectedConditions.contains('lungcondition')}" />Lung Condition (including COPD or Emphysema)</label>
+            <label><input type="checkbox" name="condition" value="mentalhealth" th:checked="${selectedConditions != null && selectedConditions.contains('mentalhealth')}" />Mental Health Condition (including depression or anxiety)</label>
+            <label><input type="checkbox" name="condition" value="stroke" th:checked="${selectedConditions != null && selectedConditions.contains('stroke')}" />Stroke (with ongoing long-term health impacts)</label>
+            <label><input type="checkbox" name="condition" value="other" th:checked="${selectedConditions != null && selectedConditions.contains('other')}" />Other Long-Term Health Condition</label>
+          </div>
+        </div>
+
+        <!-- Education Level Filter -->
+        <div class="filter-section" th:if="${selectedDataset == 'education'}" data-dataset="education">
+          <div class="filter-label">Non-School Education Level</div>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="education_level" value="pd_gd_gc" th:checked="${selectedEducationLevels != null && selectedEducationLevels.contains('pd_gd_gc')}" />Postgraduate Degree Level, Graduate Diploma and Graduate Certificate Level</label>
+            <label><input type="checkbox" name="education_level" value="bd" th:checked="${selectedEducationLevels != null && selectedEducationLevels.contains('bd')}" />Bachelor Degree Level</label>
+            <label><input type="checkbox" name="education_level" value="adip_dip" th:checked="${selectedEducationLevels != null && selectedEducationLevels.contains('adip_dip')}" />Advanced Diploma and Diploma Level</label>
+            <label><input type="checkbox" name="education_level" value="ct_iii_iv" th:checked="${selectedEducationLevels != null && selectedEducationLevels.contains('ct_iii_iv')}" />Certificate III & IV Level</label>
+            <label><input type="checkbox" name="education_level" value="ct_i_ii" th:checked="${selectedEducationLevels != null && selectedEducationLevels.contains('ct_i_ii')}" />Certificate I & II Level</label>
+          </div>
+        </div>
+
+        <!-- School Completion Filter -->
+        <div class="filter-section" th:if="${selectedDataset == 'school'}" data-dataset="school">
+          <div class="filter-label">School Education Level</div>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="completion" value="did_not_go_to_school" th:checked="${selectedCompletions != null && selectedCompletions.contains('did_not_go_to_school')}" />Did not go to School</label>
+            <label><input type="checkbox" name="completion" value="y8_below" th:checked="${selectedCompletions != null && selectedCompletions.contains('y8_below')}" />Year 8 or Below</label>
+            <label><input type="checkbox" name="completion" value="y9_equivalent" th:checked="${selectedCompletions != null && selectedCompletions.contains('y9_equivalent')}" />Year 9 or Equivalent</label>
+            <label><input type="checkbox" name="completion" value="y10_equivalent" th:checked="${selectedCompletions != null && selectedCompletions.contains('y10_equivalent')}" />Year 10 or Equivalent</label>
+            <label><input type="checkbox" name="completion" value="y11_equivalent" th:checked="${selectedCompletions != null && selectedCompletions.contains('y11_equivalent')}" />Year 11 or Equivalent</label>
+            <label><input type="checkbox" name="completion" value="y12_equivalent" th:checked="${selectedCompletions != null && selectedCompletions.contains('y12_equivalent')}" />Year 12 or Equivalent</label>
+          </div>
+        </div>
+
+        <!-- Population Age Filter -->
+        <div class="filter-section" th:if="${selectedDataset == 'population'}" data-dataset="population">
+          <div class="filter-label">Age Range</div>
+          <div class="range-container">
+            <span>0</span>
+            <input type="range" id="ageRange" name="targetage_min" min="0" max="65" th:value="${selectedAgeMin != null ? selectedAgeMin : 0}" oninput="ageRangeValue.textContent = this.value + (this.value == '65' ? '+' : '')" />
+            <span>65+</span>
+            <span id="ageRangeValue" class="range-value" th:text="${selectedAgeMin != null ? selectedAgeMin : '0'}">0</span>
+          </div>
+
+          <div class="range-container">
+            <span>0</span>
+            <input type="range" id="ageRangeMax" name="targetage_max" min="0" max="65" th:value="${selectedAgeMax != null ? selectedAgeMax : 65}" oninput="ageRangeMaxValue.textContent = this.value + (this.value == '65' ? '+' : '')" />
+            <span>65+</span>
+            <span id="ageRangeMaxValue" class="range-value" th:text="${selectedAgeMax != null ? selectedAgeMax : '65+'}">65+</span>
+          </div>
+        </div>
+        <button type="submit" class="sort-btn">Apply Filters</button>
+      </form>
+      <!-- Results Table -->
+      <div th:if="${hasResults}" class="results-table">
+        <table>
+          <thead>
+            <tr>
+              <th>LGA Name</th>
+              <th>Sex</th>
+              <th>Status</th>
+              <th th:if="${selectedDataset == 'education' || selectedDataset == 'health' || selectedDataset == 'school'}">Category</th>
+              <th>2016 Total</th>
+              <th>2021 Total</th>
+              <th>Change</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="result : ${gap}">
+              <td th:text="${result.lga_name}"></td>
+              <td th:text="${result.sex}"></td>
+              <td th:text="${result.indi_status}"></td>
+              <td th:if="${selectedDataset == 'education' || selectedDataset == 'health' || selectedDataset == 'school'}" th:text="${result.category}"></td>
+              <td th:text="${result.total_2016}"></td>
+              <td th:text="${result.total_2021}"></td>
+              <td th:text="${result.change}"></td>
+              <td th:text="${result.status}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div th:if="${error}" class="error-message" th:text="${error}"></div>
+    </div>
+  </div>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+  <script>
+    // Add event listeners for form submission
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get all form data
+        const formData = new FormData(this);
+        
+        // Submit the form
+        fetch(this.action, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(html => {
+          document.documentElement.innerHTML = html;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
+    // Function to update age range display
+    function updateAgeRange(value, elementId) {
+      const displayElement = document.getElementById(elementId);
+      if (value == 65) {
+        displayElement.textContent = '65+';
+      } else {
+        displayElement.textContent = value;
+      }
+      
+      // Validate that min age is not greater than max age
+      const minAge = parseInt(document.getElementById('ageRange').value);
+      const maxAge = parseInt(document.getElementById('ageRangeMax').value);
+      
+      if (minAge > maxAge) {
+        if (elementId === 'ageRangeValue') {
+          document.getElementById('ageRangeMax').value = minAge;
+          updateAgeRange(minAge, 'ageRangeMaxValue');
+        } else {
+          document.getElementById('ageRange').value = maxAge;
+          updateAgeRange(maxAge, 'ageRangeValue');
+        }
+      }
+    }
+
+    // Function to handle dataset and LGA selection
+    function handleDatasetAndLGA() {
+      const datasetSelect = document.getElementById('datasets');
+      const lgaSelect = document.getElementById('lgaSelect');
+      const ageRangeFilters = document.getElementById('ageRangeFilters');
+      const sortBtn = document.querySelector('.sort-btn');
+
+      // Show age range filters only if population dataset and LGA are selected
+      if (datasetSelect.value === 'population' && lgaSelect.value) {
+        ageRangeFilters.style.display = 'block';
+        sortBtn.textContent = 'APPLY AGE FILTER';
+        
+        // Initialize age range values
+        updateAgeRange(document.getElementById('ageRange').value, 'ageRangeValue');
+        updateAgeRange(document.getElementById('ageRangeMax').value, 'ageRangeMaxValue');
+      } else {
+        ageRangeFilters.style.display = 'none';
+        sortBtn.textContent = 'SORT';
+      }
+    }
+
+    // Add event listeners for dataset and LGA selection
+    document.getElementById('datasets').addEventListener('change', handleDatasetAndLGA);
+    document.getElementById('lgaSelect').addEventListener('change', handleDatasetAndLGA);
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', handleDatasetAndLGA);
+  </script>
+</body>
+</html>

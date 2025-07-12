@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closing the Gap</title>
+  <link rel="stylesheet" th:href="@{/css/education.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+<header>
+   <div class="top-bar">
+       <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+       <div class="auth-buttons">
+           <a th:href="@{/signin}" class="auth-button">Sign In</a>
+           <a th:href="@{/signup}" class="auth-button">Register</a>
+       </div>
+   </div>
+   <nav>
+       <ul>
+           <li><a th:href="@{/agehealth}">Age & Health</a></li>
+           <li style="font-weight: bold;"><a th:href="@{/education}">Education</a></li>
+           <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+           <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+           <li><a th:href="@{/how2use}">How to use</a></li>
+       </ul>
+   </nav>
+</header>
+
+<!-- Main Container Structure -->
+<div class="container">
+    <!-- Filter Header -->
+    <div class="header">
+       <i class="fas fa-filter"></i>
+       <span>SEARCH FILTER</span>
+   </div>
+    
+    <div class="content">
+        <!-- Left Panel - Filter Options -->
+        <div class="left-panel">
+            <!-- Sex Filter Section -->
+            <div class="section">
+               <div class="section-title">By Sex</div>
+               <label><input type="checkbox" /> Female</label>
+               <label><input type="checkbox" /> Male</label>
+           </div>
+            
+            <!-- Status Filter Section -->
+            <div class="section">
+               <div class="section-title">By Status</div>
+               <label><input type="checkbox" /> Indigenous</label>
+               <label><input type="checkbox" /> Non-Indigenous</label>
+               <label><input type="checkbox" /> Not stated</label>
+           </div>
+            
+            <!-- Area Filter Section -->
+            <div class="section">
+               <div class="section-title">By Area</div>
+               <label><input type="checkbox" /> New South Wales</label>
+               <label><input type="checkbox" /> Victoria</label>
+               <label><input type="checkbox" /> Queensland</label>
+               <label><input type="checkbox" /> South Australia</label>
+               <label><input type="checkbox" /> Western Australia</label>
+               <label><input type="checkbox" /> Tasmania</label>
+               <label><input type="checkbox" /> Northern Territory</label>
+               <label><input type="checkbox" /> ACT (Australian Capital Territory)</label>
+               <label><input type="checkbox" /> Other</label>
+           </div>
+            
+            <!-- School Range Filter Section -->
+            <div class="section">
+               <div class="section-title">By Year Range Of School</div>
+               <label><input type="checkbox" /> Did not attend school</label>
+               <label><input type="checkbox" /> Year 8 or Below</label>
+               <label><input type="checkbox" /> Year 9 or Below</label>
+               <label><input type="checkbox" /> Year 10 or Below</label>
+               <label><input type="checkbox" /> Year 11 or Below</label>
+               <label><input type="checkbox" /> Year 12 or Below</label>
+           </div>
+            
+            <!-- Education Level Filter Section -->
+            <div class="section">
+               <div class="section-title">By Education Level</div>
+               <label><input type="checkbox" /> Postgraduate Degree, Graduate Diploma or Graduate Certificate Level</label>
+               <label><input type="checkbox" /> Bachelor Degree Level</label>
+               <label><input type="checkbox" /> Advanced Diploma and Diploma Level</label>
+               <label><input type="checkbox" /> Certificate III & IV Level</label>
+               <label><input type="checkbox" /> Certificate I & II Level</label>
+           </div>
+            
+            <!-- Action Buttons -->
+            <div class="buttons">
+               <button class="sort-btn">SORT</button>
+               <button class="clear-btn">CLEAR ALL SELECTION</button>
+           </div>
+        </div>
+
+        <!-- Right Panel - Data Display -->
+        <div class="right-panel">
+            <!-- School Completion Data Section -->
+            <h3>School Completion Data</h3>
+            <!-- Sort Controls -->
+            <form th:action="@{/education}" method="get" class="sort-form">
+              <select id="schoolSort" name="schoolSortOrder" onchange="this.form.submit()">
+                <option value="" disabled selected>Sort School Completion Data</option>
+                <option value="ASC" th:selected="${schoolSortOrder == 'ASC'}">Sort by Count (Low to High)</option>
+                <option value="DESC" th:selected="${schoolSortOrder == 'DESC'}">Sort by Count (High to Low)</option>
+              </select>
+            </form>
+            
+            <!-- School Completion Table -->
+            <div class="table-wrapper">
+              <table border="1">
+                <thead>
+                <tr>
+                    <th>LGA Name</th>
+                    <th>LGA Code</th>
+                    <th>Indigenous Status</th>
+                    <th>Category</th>
+                    <th>Total Count</th>
+                    <th>Percentage (%)</th>
+                    <th>Rank</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="school_completion : ${school_completion}">
+                    <td th:text="${school_completion.name}">LGA Name</td>
+                    <td th:text="${school_completion.lga_code}">LGA Code</td>
+                    <td th:text="${school_completion.indi_status}">Indigenous Status</td>
+                    <td th:text="${school_completion.category}">Category</td>
+                    <td th:text="${school_completion.total_counts}">Total Count</td>
+                    <td th:text="${school_completion.percentage}">Percentage</td>
+                    <td th:text="${school_completion.rank}">Rank</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Non-School Education Data Section -->
+            <h3>Non-School Education Data</h3>
+            <!-- Sort Controls -->
+            <form th:action="@{/education}" method="get" class="sort-form">
+              <select id="educationLevelSort" name="educationLevelSortOrder" onchange="this.form.submit()">
+                <option value="" disabled selected>Sort Education Level Data</option>
+                <option value="ASC" th:selected="${educationLevelSortOrder == 'ASC'}">Sort by Count (Low to High)</option>
+                <option value="DESC" th:selected="${educationLevelSortOrder == 'DESC'}">Sort by Count (High to Low)</option>
+              </select>
+            </form>
+            
+            <!-- Education Level Table -->
+            <div class="table-wrapper">
+              <table border="1">
+                <thead>
+                <tr>
+                    <th>LGA Name</th>
+                    <th>LGA Code</th>
+                    <th>Indigenous Status</th>
+                    <th>Category</th>
+                    <th>Total Count</th>
+                    <th>Percentage (%)</th>
+                    <th>Rank</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="education_level : ${education_level}">
+                    <td th:text="${education_level.name}">LGA Name</td>
+                    <td th:text="${education_level.lga_code}">LGA Code</td>
+                    <td th:text="${education_level.indi_status}">Indigenous Status</td>
+                    <td th:text="${education_level.category}">Category</td>
+                    <td th:text="${education_level.total_counts}">Total Count</td>
+                    <td th:text="${education_level.percentage}">Percentage</td>
+                    <td th:text="${education_level.rank}">Rank</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Clear Button JavaScript -->
+<script>
+    document.querySelector('.clear-btn').addEventListener('click', function() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+
+      document.querySelectorAll('select').forEach(select => {
+        select.selectedIndex = 0;
+      });
+
+      this.classList.add('clicked');
+      setTimeout(() => {
+        this.classList.remove('clicked');
+      }, 200);
+    });
+  </script>
+
+<!-- Footer Section -->
+<footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

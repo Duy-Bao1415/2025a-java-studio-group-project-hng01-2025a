@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closing the Gap</title>
+  <link rel="stylesheet" th:href="@{/css/signinup.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+ <div class="container">
+    <div class="left">
+      <img th:src="@{/images/logo.png}" alt="Logo" />
+      <p>Strong start, Bright Future</p>
+    </div>
+    <form class="right" action="#" method="POST">
+      <h2>Sign Up and Get Started now !</h2>
+      <label for="email">Email/Phone number</label>
+      <input type="text" id="email" name="email" placeholder="Type here..." />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Type here..." />
+      <p class="signup-text">Already got an account <a th:href="@{/signin}">? Sign in</a></p>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

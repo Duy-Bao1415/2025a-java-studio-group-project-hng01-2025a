@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our vision</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/missionstatement.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+      <div class="auth-buttons">
+          <a th:href="@{/signin}" class="auth-button">Sign In</a>
+          <a th:href="@{/signup}" class="auth-button">Register</a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li style="font-weight: bold;"><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <section class="about-section">
+      <div class="about-text">
+        <h2 class="about-title" aria-label="About Us">
+          About Us
+        </h2>
+        <p>This is a website developed by <strong>Team-HN-G01-JavaStudio-2025A</strong> from <strong>RMIT University</strong>, a team of dedicated students who are passionate about digital solutions for social impact. As part of our academic journey, we've developed this website to support awareness and understanding of Australia's Closing the Gap initiative. Our website provides:</p>
+        <ul class="about-list">
+          <li>Visualisation and comparison of data about age, health and education from the 2016 and 2021 Australian Censuses</li>
+          <li>State/territory-level breakdowns for region-specific analysis</li>
+          <li>Accessible dashboards designed for a wide range of users</li>
+        </ul>
+      </div>
+      <div class="about-image">
+        <img th:src="@{/images/about.png}" alt="Illustration of a person sitting on a chair working on a laptop with charts and graphs displayed around" width="340" height="170" loading="lazy" />
+      </div>
+    </section>
+    <!-- Our Member Section Dynamically -->
+    <section class="member-section" aria-label="Our Member">
+      <h3 class="member-title">Our Member</h3>
+      <div class="member-list">
+        <!-- Dynamic member cards using Thymeleaf -->
+        <article th:each="member : ${members}" class="member-card" role="group" th:aria-label="'Member ' + ${member.full_name}">
+          <img th:src="@{'/images/' + ${member.mem_img}}" 
+               th:alt="'Portrait photo of ' + ${member.full_name}" 
+               width="96" height="96" loading="lazy" />
+          <p class="member-name" th:text="${member.full_name}">Member Name</p>
+          <p class="member-email" th:text="${member.sID} + '@rmit.edu.vn'">Member Email</p>
+          <p class="member-role" th:text="${member.gender}">Member Role</p>
+        </article>
+      </div>
+    </section>
+    <section class="purpose-section" aria-label="Our Purpose">
+      <h3 class="purpose-title">Our Purpose</h3>
+      <ul class="purpose-list">
+        <li><em>Our mission is to support the Closing the Gap initiative by focusing on two key outcomes:</em></li>
+      </ul>
+      <div class="outcomes">
+        <div class="outcome-card">
+          <img th:src="@{/images/outcome1.jpg}" alt="Photo of Aboriginal and Torres Strait Islander people enjoying time together" class="outcome-image" width="64" height="64" loading="lazy" />
+          <div class="outcome-text">
+            <span class="outcome-title">Outcome 1</span>
+            <p class="outcome-desc">Aboriginal and Torres Strait Islander people enjoy long and healthy lives</p>
+          </div>
+        </div>
+        <div class="outcome-card">
+          <img th:src="@{/images/outcome5.jpg}" alt="Photo of Aboriginal and Torres Strait Islander students smiling and happy" class="outcome-image" width="64" height="64" loading="lazy" />
+          <div class="outcome-text">
+            <span class="outcome-title">Outcome 5</span>
+            <p class="outcome-desc">Aboriginal and Torres Strait Islander students achieve their full learning potential</p>
+          </div>
+        </div>
+      </div>
+      <ul class="platform-list">
+        <li><em>To achieve this, our platform aims to:</em></li>
+      </ul>
+      <div class="platform-cards">
+        <div class="platform-card">
+          <div class="star" aria-hidden="true">★</div>
+          <p>Raise awareness of critical challenges such as reduced life expectancy, infant mortality, and low school attendance</p>
+        </div>
+        <div class="platform-card">
+          <div class="star" aria-hidden="true">★</div>
+          <p>Support early learning and family engagement through accessible information</p>
+        </div>
+        <div class="platform-card">
+          <div class="star" aria-hidden="true">★</div>
+          <p>Track progress through clear, comparative data from the 2016 and 2021 Censuses in health and education</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p th:if="${members != null and !members.isEmpty()}">
+        <span th:each="member, iterStat : ${members}">
+          <span th:text="${member.full_name}">Member Name</span>
+          <br th:if="${!iterStat.last}" />
+        </span>
+      </p>
+      <p th:if="${members == null or members.isEmpty()}">
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

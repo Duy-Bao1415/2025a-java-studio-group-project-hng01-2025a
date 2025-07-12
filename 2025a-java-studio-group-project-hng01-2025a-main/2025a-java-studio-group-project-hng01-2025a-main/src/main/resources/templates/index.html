@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closing the Gap</title>
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <img th:src="@{/images/logo.png}" alt="Logo" class="logo">
+      <div class="auth-buttons">
+          <a th:href="@{/signin}" class="auth-button">Sign In</a>
+          <a th:href="@{/signup}" class="auth-button">Register</a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+  <section class="hero">
+    <img th:src="@{/images/herosection.png}" alt="Hero Graphic" />
+  </section>
+  <section class="overview">
+    <div class="text">
+      <h2>Overview</h2>
+      <p>
+        This website aims to shed light on key disparities faced by Aboriginal and Torres Strait Islander communities by focusing on <strong>life expectancy (Outcome 1)</strong> and early <strong>childhood education (Outcome 5)</strong>. Through visual comparisons of population data from 2016 to 2021, we highlight progress and remaining gaps in health and education.
+      </p>
+    </div>
+    <img th:src="@{/images/overview.png}" alt="People Graphic" />
+  </section>
+  <section class="map-section">
+    <h3>Population of Australia in 2016 and 2021</h3>
+  <div id="map-container">
+  <button class="region" id="western-australia" style="left: 65px; top: 40px; width: 130px !important; height: 200px !important;"></button>
+  <button class="region" id="northern-territory" style="left: 200px; top: 17px; width: 75px !important; height: 130px !important;"></button>
+  <button class="region" id="queensland" style="left: 280px; top: 55px; width: 120px !important; height: 110px !important;"></button>
+  <button class="region" id="south-australia" style="left: 200px; top: 150px; width: 90px !important; height: 90px !important;"></button>
+  <button class="region" id="new-south-wales" style="left: 300px; top: 170px; width: 100px !important; height: 60px !important;"></button>
+  <button class="region" id="victoria" style="left: 295px; top: 230px; width: 70px !important; height: 35px !important;"></button>
+  <button class="region" id="tasmania" style="left: 320px; top: 280px; width: 40px !important; height: 35px !important;"></button>
+</div>
+    <div id="info-panel">
+      <h2 id="region-name"></h2>
+      <p><strong>2016:</strong> <span id="pop2016"></span></p>
+      <p><strong>2021:</strong> <span id="pop2021"></span></p>
+      <p><strong>Growth Rate:</strong> <span id="growth-rate"></span></p>
+    </div>
+  </div>
+    <!-- Dynamic population data -->
+    <div th:if="${dataError}" class="data-warning" style="color: #ff6b6b; font-style: italic; margin: 10px 0;">
+      <p th:text="${dataError}">Error message will appear here</p>
+    </div>
+    <p>
+      <strong style="color: orange; font-size: 1.2em;" th:text="${population2016}">Loading...</strong> citizens in 2016 &nbsp;
+      <strong style="color: orange; font-size: 1.2em;" th:text="${population2021}">Loading...</strong> citizens in 2021
+    </p>
+    <p>Population growth rate<br /><strong style="color: green; font-size: 1.5em;" th:text="${growthRate}">Loading...</strong></p>
+  </section>
+  <section class="outcomes-dropdown">
+    <h3>17 Socioeconomic Outcomes</h3>
+    <div class="dropdown-container">
+        <details class="dropdown-item">
+            <summary style="color: #4E2A1E;">1. Everyone enjoys long and healthy lives</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander people enjoy long and healthy lives.</p>
+                <p><strong>Target:</strong> Close the Gap in life expectancy within a generation, by 2031.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #6B3D26;">2. Children are born healthy and strong</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander children are born healthy and strong.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander babies with a healthy birth weight to 91 percent.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #8C2F1C;">3. Children are engaged in high quality, culturally appropriate early childhood education in their early years</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander children are engaged in high quality, culturally appropriate early childhood education in their early years.</p>
+                <p><strong>Target:</strong> By 2025, increase the proportion of Aboriginal and Torres Strait Islander children enrolled in Year Before Full Time Schooling (YBFS) early childhood education to 95 per cent.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color:#A3321E">4. Children thrive in their early years</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander children thrive in their early years.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander children assessed as developmentally on track in all five domains of the Australian Early Development Census (AEDC) to 55 per cent.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #C1440E;">5. Students achieve their full learning potential</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander children assessed as developmentally on track in all five domains of the Australian Early Development Census (AEDC) to 55 per cent.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander people (age 20-24) attaining year 12 or equivalent qualification to 96 per cent.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #D85E1F;">6. Students reach their full potential through further education pathways</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander students reach their full potential through further education pathways.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander people aged 25-34 who have completed a tertiary qualification (Certificate III and above) to 70%.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #E76F24;">7. Youth are engaged in employment or education</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander youth are engaged in employment or education.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander youth aged 15-24 who are in employment, education, or training to 67%.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #F28E2B;">8. Strong economic participation and development of people and their communities</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Strong economic participation and development of Aboriginal and Torres Strait Islander people and communities.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander people aged 25-64 who are employed to 62%.</p>
+            </div>
+        </details>    
+        <details class="dropdown-item">
+            <summary style="color: #D4A017;">9. People can secure appropriate, affordable housing that is aligned with their priorities and need</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander people secure appropriate, affordable housing that is aligned with their priorities and needs.</p>
+                <p><strong>Target:</strong> By 2031, increase the proportion of Aboriginal and Torres Strait Islander people living in appropriately sized (not overcrowded) housing to 88%.​</p>
+            </div>
+        </details>     
+        <details class="dropdown-item">
+            <summary style="color: #F8A84C;">10. Adults are not overrepresented in the criminal justice system</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander people are not overrepresented in the criminal justice system.</p>
+                <p><strong>Target:</strong> By 2031, reduce the rate of Aboriginal and Torres Strait Islander adults held in incarceration by at least 15%.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #F0CA0E;">11. Young people are not overrepresented in the criminal justice system</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander young people are not overrepresented in the criminal justice system.</p>
+                <p><strong>Target:</strong> By 2031, reduce the rate of Aboriginal and Torres Strait Islander young people aged 10-17 in detention by at least 30%.</p>
+            </div>
+        </details>    
+        <details class="dropdown-item">
+            <summary style="color: #D4C655;">12. Children are not overrepresented in the child protection system</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander children are not overrepresented in the child protection system.</p>
+                <p><strong>Target:</strong> By 2031, reduce the rate of over-representation of Aboriginal and Torres Strait Islander children in out-of-home care by 45%.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #C2B84E;">13. Families and households are safe</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander families and households are safe.</p>
+                <p><strong>Target:</strong> By 2031, the rate of all forms of family violence and abuse against Aboriginal and Torres Strait Islander women and children is reduced by at least 50%, as progress towards zero.</p>
+            </div>
+        </details>    
+        <details class="dropdown-item">
+            <summary style="color: #A9B26F;">14. People enjoy high levels of social and emotional wellbeing</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander people enjoy high levels of social and emotional wellbeing.</p>
+                <p><strong>Target:</strong> Achieve a significant and sustained reduction in suicide of Aboriginal and Torres Strait Islander people towards zero.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #8FA85C;">15. People maintain a distinctive cultural, spiritual, physical and economic relationship with their land and waters</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander people maintain a distinctive cultural, spiritual, physical, and economic relationship with their land and waters.</p>
+                <p><strong>Target:</strong> By 2030, a 15% increase in Australia's landmass subject to Aboriginal and Torres Strait Islander people's legal rights or interests.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #7A9E4F;">16. Cultures and languages are strong, supported and flourishing</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander cultures and languages are strong, supported, and flourishing.</p>
+                <p><strong>Target:</strong> By 2031, there is a sustained increase in the number and strength of Aboriginal and Torres Strait Islander languages being spoken.</p>
+            </div>
+        </details>
+        <details class="dropdown-item">
+            <summary style="color: #6A8D3F;">17. People have access to information and services enabling participation in informed decision-making regarding their own lives</summary>
+            <div class="content">
+                <p><strong>Outcome:</strong> Aboriginal and Torres Strait Islander people have access to information and services enabling participation in informed decision-making regarding their own lives.</p>
+                <p><strong>Target:</strong> By 2026, Aboriginal and Torres Strait Islander people have equal levels of digital inclusion</p>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+  <!-- Thymeleaf script to pass server data to JavaScript -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const regionData = /*[[${regionData}]]*/ {};
+    /*]]>*/
+  </script>
+<!-- Main script to handle region clicks and display info -->
+  <script>
+    let currentRegion = null;
+
+    document.querySelectorAll('.region').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = el.id;
+
+        // Toggle off if clicking the same region again
+        if (currentRegion === id) {
+          document.getElementById('info-panel').style.display = 'none';
+          currentRegion = null;
+          return;
+        }
+
+        const data = regionData[id];
+        if (!data) {
+          console.warn('No data found for region:', id);
+          return;
+        }
+        // Show updated region info
+        document.getElementById('region-name').textContent = data.name;
+        document.getElementById('pop2016').textContent = data.pop2016Formatted;
+        document.getElementById('pop2021').textContent = data.pop2021Formatted;
+        document.getElementById('growth-rate').textContent = data.rate;
+        document.getElementById('info-panel').style.display = 'block';
+        currentRegion = id;
+      });
+    });
+  </script>
+</body>
+</html>

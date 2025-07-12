@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closing the Gap</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/persona.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+      <div class="auth-buttons">
+          <a th:href="@{/signin}" class="auth-button">Sign In</a>
+          <a th:href="@{/signup}" class="auth-button">Register</a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+  <div class="personas-wrapper">
+    <div class="personas-inner">
+      <p class="intro">
+       Introducing our Personas
+      </p>
+      <!-- Loop through personas from controller -->
+      <section class="person" th:each="persona : ${personas}">
+       <div class="person-header">
+        <img th:src="@{'/images/' + ${persona.personaImg}}" alt="Image" height="80" width="80"/>
+        <h2 class="name">
+         <span class="first-letter" th:text="${#strings.substring(persona.personaName, 0, 1)}">
+          M
+         </span>
+         <span th:text="${#strings.substring(persona.personaName, 1)}">inguel</span>
+        </h2>
+       </div>
+       <p class="quote" th:text="${persona.personaQuote}">
+        "I need better access to healthcare and education resources for my children's future."
+       </p>
+       <p class="subheading">
+        Short description:
+       </p>
+       <ul>
+        <li th:text="${persona.personaDescription}">
+         Part-time community worker.
+        </li>
+        <li th:text="${'Age: ' + persona.personaAge}">
+         32 years old.
+        </li>
+       </ul>
+       <p class="subheading">
+        Background:
+       </p>
+       <p class="text" th:text="${persona.personaBackground}">
+        Background information here
+       </p>
+       <p class="subheading">
+        Needs:
+       </p>
+       <ul>
+        <li th:text="${persona.personaNeed1}">
+         Need 1
+        </li>
+        <li th:text="${persona.personaNeed2}">
+         Need 2
+        </li>
+       </ul>
+       <p class="subheading">
+        Pain Points:
+       </p>
+       <ul>
+        <li th:text="${persona.personaPain1}">
+         Pain point 1
+        </li>
+        <li th:text="${persona.personaPain2}">
+         Pain point 2
+        </li>
+       </ul>
+       <p class="subheading">
+        Technology usage:
+       </p>
+       <ul>
+        <li th:text="${persona.personaSkills}">
+         Technology skills
+        </li>
+       </ul>
+      </section>
+      
+    </div>
+  </div>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a>
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a>
+    </div>
+    <div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

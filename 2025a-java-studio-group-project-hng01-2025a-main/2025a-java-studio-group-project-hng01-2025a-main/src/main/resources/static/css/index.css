@@ -1,0 +1,235 @@
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+line-height: 1.6;
+}
+
+.overview, .map-section, .outcomes-dropdown {
+max-width: 1800px;
+margin-left: auto;
+margin-right: auto;
+padding-left: 32px;
+padding-right: 32px;
+}
+
+.overview {
+display: flex;
+justify-content: space-between;
+padding: 20px;
+}
+.overview .text {
+flex: 1;
+margin-right: 20px;
+}
+.overview .text h2 {
+font-size: 28px;
+}
+.overview .text p {
+font-size: 20px;
+}
+.overview img {
+max-width: 250px;
+border-radius: 5px;
+}
+.hero {
+text-align: center;
+background: none;
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+.hero img {
+width: 100%;
+max-width: 100vw;
+height: 180px;
+object-fit: cover;
+display: block;
+margin: 0 auto;
+}
+.map-section {
+text-align: center;
+padding: 30px 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.map-section h3{
+font-size: 30px;
+}
+.map-section img {
+width: 80%;
+max-width: 400px;
+}
+.map-section p {
+font-size: 18px;
+}
+.outcomes-dropdown {
+padding: 40px 20px;
+background: #fff;
+text-align: center;
+}
+.outcomes-dropdown h3 {
+font-size: 30px;
+padding-bottom: 15px;
+}
+.dropdown-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 15px;
+max-width: 1200px;
+margin: 20px auto;
+padding: 0 20px;
+align-items: start;
+}
+.dropdown-item {
+margin: 0;
+border: 1px solid #ddd;
+border-radius: 5px;
+background: #fef8f3;
+padding: 0;
+overflow: hidden;
+}
+
+.dropdown-item summary {
+font-weight: 700;
+cursor: pointer;
+text-align: center;
+display: block;
+width: 100%;
+padding: 10px 0;
+font-size: 1.1em;
+margin: 0;
+line-height: 1.2;
+background: transparent;
+border: none;
+}
+
+.dropdown-item summary::-webkit-details-marker {
+display: none;
+}
+
+.dropdown-item[open] {
+background: #fcecd6;
+}
+
+.dropdown-item .content {
+display: none;
+padding: 15px;
+text-align: left;
+background: #fff;
+border-top: 1px solid #eee;
+}
+
+.dropdown-item[open] .content {
+display: block;
+}
+
+.dropdown-item p {
+padding: 8px 0;
+margin: 0;
+text-align: left;
+color: #444;
+font-size: 0.95em;
+line-height: 1.5;
+}
+
+.dropdown-item p:first-child {
+color: #333;
+border-bottom: 1px solid #eee;
+padding-bottom: 12px;
+margin-bottom: 8px;
+}
+
+/* Hide content by default */
+.dropdown-item > *:not(summary) {
+display: none;
+}
+
+/* Show content only when details is open */
+.dropdown-item[open] > *:not(summary) {
+display: block;
+}
+
+select {
+width: 90%;
+max-width: 600px;
+padding: 10px;
+font-size: 16px;
+}
+@media (max-width: 600px) {
+.overview {
+flex-direction: column;
+align-items: center;
+}
+.overview .text {
+margin-right: 0;
+}
+.overview img {
+margin-top: 20px;
+}
+}
+#map-container {
+position: relative;
+width: 500px;
+height: 350px;
+margin: 0 auto;
+background: url('../images/map/map.png') no-repeat;
+background-size: 500px 350px;
+background-position: center;
+}
+.region {
+position: absolute;
+background: transparent;
+border: none;
+cursor: pointer;
+padding: 0;
+}
+
+.region:hover {
+outline: 1px solid rgba(241, 189, 105, 0.5);
+}
+
+/* Updated button positions to match map regions exactly */
+
+
+#info-panel {
+width: 300px;
+padding: 20px;
+background-color: #fdf4e4;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+margin-top: 30px;
+display: none;
+text-align: left;
+}
+#info-panel h2 { margin-top: 0; text-align: center; }
+
+#totals {
+max-width: 800px;
+margin: 20px auto;
+text-align: center;
+}
+.details {
+display: flex;
+justify-content: space-around;
+margin-bottom: 10px;
+}
+.item {
+font-size: 1.2rem;
+color: #333;
+}
+.item .number {
+font-weight: bold;
+font-size: 2rem;
+color: #ea580c;
+display: block;
+}
+.growth {
+font-size: 1.2rem;
+font-weight: normal;
+color: #333;
+}
+.growth strong {
+color: #16a34a;
+font-weight: bold;
+}

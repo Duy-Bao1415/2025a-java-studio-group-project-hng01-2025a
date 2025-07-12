@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our vision</title>
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/how2use.css}">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="Logo" class="logo"></a>
+      <div class="auth-buttons">
+          <a th:href="@{/signin}" class="auth-button">Sign In</a>
+          <a th:href="@{/signup}" class="auth-button">Register</a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/agehealth}">Age & Health</a></li>
+            <li><a th:href="@{/education}">Education</a></li>
+            <li><a th:href="@{/gapanalysis}">Gap Analysis</a></li>
+            <li><a th:href="@{/missionstatement}">Mission Statement</a></li>
+            <li style="font-weight: bold;"><a th:href="@{/how2use}">How to use</a></li> 
+        </ul>
+    </nav>
+  </header>
+ <main>
+    <h1>How to Use This Website</h1>
+    <p>Struggle to get started? Here’s a step-by-step guide to help you get started:</p>
+    <p><span class="inline-icon">🔍</span><strong>Homepage</strong></p>
+    <p class="italic">The Homepage provides an <strong>overview</strong> of the website, a close look at the <strong>population</strong> of Australia and each of its territory and brief description of <strong>17 socioeconomic outcomes</strong>.</p>
+    <p class="italic">Click the map to view the data of that area.</p>
+    <p class="italic">Click the arrow drop down of each outcome to view the description and target of the outcome.</p>
+    <p class="italic">Use the top menu to go to one of these sections:</p>
+    <ul>
+      <li>Age & Health – See health data like age range and diseases</li>
+      <li>Education – Learn about school attendance and learning outcomes</li>
+      <li>Gap Analysis – Compare changes between 2016 and 2021</li>
+    </ul>
+    <p class="italic">Each section gives you interactive data based on trusted national sources.</p>
+    <p><span class="inline-icon">📊</span><strong>Understand the data</strong></p>
+    <p class="italic">On the Age & Health/Education sub-page, you’ll see a Search Filter on the left to select <strong>the general</strong> data:</p>
+    <ul>
+      <li>By sex: Male, Female</li>
+      <li>By status: Indigenous, Non-Indigenous, Not-Stated</li>
+      <li>By area: New South Wales, Tasmania, Victoria, etc.</li>
+    </ul>
+    <p class="italic">On the right side of the page, continue to choose <strong>other options</strong> (Age Range, Diseases, Highest Year of School, etc.) based on the page you are selecting. <span>After choosing all the categories, click the <span class="green">green</span> button “Sort” to view the filtered data. When finished, you can click the <span class="red">red</span> button “Clear all selection” and redo the process to view another sorted data.</span></p>
+    <p><span class="inline-icon">💡</span><strong>What You Can Learn</strong></p>
+    <p class="italic">You can use this website to:</p>
+    <ul>
+      <li>See how health and education have changed over 5 years</li>
+      <li>Understand where progress is being made — and where it’s not</li>
+      <li>Support your work, study, or advocacy with real numbers</li>
+    </ul>
+    <p><span class="inline-icon">🌐</span><strong>Language and Accessibility</strong></p>
+    <ul>
+      <li>We use simple words and visual tools to help everyone understand</li>
+      <li>We aim to be respectful, inclusive, and easy to navigate</li>
+    </ul>
+    <p><span class="inline-icon">🤝</span><strong>Need Help?</strong></p>
+    <p class="italic">If you’re unsure where to start:</p>
+    <ul>
+      <li>Go to the Homepage for an overview</li>
+      <li>Visit the Contact Us page to ask a question</li>
+      <li>Explore the Vision or Personas pages to understand why this matters</li>
+    </ul>
+  </main>
+  <footer>
+    <div>
+      <h4>About</h4>
+      <a th:href="@{/vision}">Our vision</a><br />
+      <a th:href="@{/missionstatement}">Our mission statement</a><br />
+      <a th:href="@{/how2use}">How to use</a><br />
+      <a th:href="@{/contact}">Contact us</a><br />
+    </div>
+    <div>
+      <h4>Detailed View</h4>
+      <a th:href="@{/persona}">Our Personas</a><br />
+      <a th:href="@{/agehealth}">Age & Health</a><br />
+      <a th:href="@{/education}">Education</a><br />
+      <a th:href="@{/gapanalysis}">Gap Analysis</a><br />
+    </div>
+    <div>
+    <div>
+      <h4>Team HN-G01-JavaStudio-2025A</h4>
+      <p>
+        Uong Minh Duc<br />Tran Chi Thien<br />Luong Thuy Vy<br />Pham Duy Bao<br />Nguyen Hoang Tung
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
