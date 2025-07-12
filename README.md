@@ -1,4 +1,3 @@
-# 2025a-java-studio-group-project-hng01-2025a
 # Closing The Gap Data Analysis Project
 
 This project provides a web-based interface for analyzing indigenous data including education, health, and population statistics with interactive filtering and gap analysis tools.
