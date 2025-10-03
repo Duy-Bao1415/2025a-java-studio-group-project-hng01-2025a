@@ -134,12 +134,5 @@ Required Dependencies:
   - Education gaps
   - Health disparities
 
-## Authors
-Team HN-G01-JavaStudio-2025A:
-* Uong Minh Duc
-* Tran Chi Thien
-* Luong Thuy Vy
-* Pham Duy Bao
-* Nguyen Hoang Tung
 
-Copyright RMIT University (c) 2025
+
